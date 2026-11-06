@@ -1,0 +1,62 @@
+=== 1. DATA-QUALITY AUDIT ===
+Rows: 705
+Duplicate rows: 0
+Missing values (total): 0
+Usage hours: 1.5 to 8.5 | Sleep hours: 3.8 to 9.6
+Mental health score: 4 to 9 | Addicted score: 2 to 9
+
+Check A: are the mental health and addiction scores near-mirror images?
+  Spearman correlation: -0.95
+  Mental + Addicted always falls between 11 and 14.
+  Distribution of the sum (value: share of students):
+    11: 2.8%
+    12: 35.2%
+    13: 54.8%
+    14: 7.2%
+  -> Real, independent survey answers rarely line up this tightly.
+
+Check B: sample structure
+  Gender counts: {'Female': 353, 'Male': 352}
+  Countries: 110; countries with 5 or fewer students: 79
+  'High School' students' ages: [18, 19, 20]
+  Group sizes by academic level: {'Undergraduate': 353, 'Graduate': 325, 'High School': 27}
+
+=== 2. DESCRIPTIVE STATISTICS ===
+       Avg_Daily_Usage_Hours  Sleep_Hours_Per_Night  Mental_Health_Score  Addicted_Score
+count                 705.00                 705.00               705.00          705.00
+mean                    4.92                   6.87                 6.23            6.44
+std                     1.26                   1.13                 1.11            1.59
+min                     1.50                   3.80                 4.00            2.00
+25%                     4.10                   6.00                 5.00            5.00
+50%                     4.80                   6.90                 6.00            7.00
+75%                     5.80                   7.70                 7.00            8.00
+max                     8.50                   9.60                 9.00            9.00
+
+=== 3. RQ1: CORRELATIONS (Spearman) ===
+                       Avg_Daily_Usage_Hours  Sleep_Hours_Per_Night  Mental_Health_Score  Addicted_Score
+Avg_Daily_Usage_Hours                   1.00                  -0.81                -0.80            0.84
+Sleep_Hours_Per_Night                  -0.81                   1.00                 0.73           -0.79
+Mental_Health_Score                    -0.80                   0.73                 1.00           -0.95
+Addicted_Score                          0.84                  -0.79                -0.95            1.00
+Usage vs mental health: -0.80  (95% CI -0.83 to -0.77)
+
+=== 4. RQ2: DOES SLEEP EXPLAIN PART OF THE LINK? ===
+Usage vs mental health, controlling for sleep: -0.52  (95% CI -0.57 to -0.46)
+Note: the addiction score is NOT used as a separate predictor (see Check A).
+
+=== 5. RQ3: AVERAGES BY GROUP ===
+
+By Gender:
+       Avg_Daily_Usage_Hours       Sleep_Hours_Per_Night       Mental_Health_Score      
+                        mean count                  mean count                mean count
+Gender                                                                                  
+Female                  5.01   353                  6.82   353                6.18   353
+Male                    4.83   352                  6.92   352                6.28   352
+
+By Academic_Level:
+               Avg_Daily_Usage_Hours       Sleep_Hours_Per_Night       Mental_Health_Score      
+                                mean count                  mean count                mean count
+Academic_Level                                                                                  
+Graduate                        4.78   325                  7.03   325                6.37   325
+High School                     5.54    27                  5.46    27                5.11    27
+Undergraduate                   5.00   353                  6.83   353                6.18   353
